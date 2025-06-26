@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechX Sri Lanka | IEEE CS WUSL</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#06ba00', // Bright green
+            secondary: '#000000', // Black
+            accent: '#00ff00', // Neon green
+            dark: '#000000', // Black
+            'cyber-green': '#06ba00',
+            'matrix-green': '#00ff00',
+            'dark-green': '#004d00',
+            light: '#f0f9ff',
+          },
+          fontFamily: {
+            sans: ['"Orbitron"', '"Space Grotesk"', 'sans-serif'],
+            display: ['"Orbitron"', '"Rajdhani"', 'sans-serif'],
+            cyber: ['"Share Tech Mono"', 'monospace'],
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'pulse-slow': 'pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'neon-pulse': 'neonPulse 2s ease-in-out infinite alternate',
+            'glitch': 'glitch 0.3s infinite',
+            'matrix': 'matrix 20s linear infinite',
+            'cyber-glow': 'cyberGlow 3s ease-in-out infinite alternate',
+            'scan-line': 'scanLine 2s linear infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-20px)' },
+            },
+            neonPulse: {
+              '0%': { textShadow: '0 0 5px #06ba00, 0 0 10px #06ba00, 0 0 15px #06ba00' },
+              '100%': { textShadow: '0 0 10px #06ba00, 0 0 20px #06ba00, 0 0 30px #06ba00' }
+            },
+            glitch: {
+              '0%': { transform: 'translate(0)' },
+              '20%': { transform: 'translate(-2px, 2px)' },
+              '40%': { transform: 'translate(-2px, -2px)' },
+              '60%': { transform: 'translate(2px, 2px)' },
+              '80%': { transform: 'translate(2px, -2px)' },
+              '100%': { transform: 'translate(0)' }
+            },
+            matrix: {
+              '0%': { transform: 'translateY(-100%)' },
+              '100%': { transform: 'translateY(100vh)' }
+            },
+            cyberGlow: {
+              '0%': { boxShadow: '0 0 5px #06ba00, 0 0 10px #06ba00, 0 0 15px #06ba00' },
+              '100%': { boxShadow: '0 0 20px #06ba00, 0 0 30px #06ba00, 0 0 40px #06ba00' }
+            },
+            scanLine: {
+              '0%': { transform: 'translateY(-100%)' },
+              '100%': { transform: 'translateY(100vh)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&family=Space+Grotesk:wght@300;400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Preloader Styles */
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 50% 50%, rgba(6, 186, 0, 0.1) 0%, transparent 50%),
+        linear-gradient(135deg, #000000 0%, #001a00 50%, #000000 100%);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    }
+    
+    .preloader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    
+    /* Futuristic Loading Animation */
+    .loader-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+    
+    /* Rotating Tech Circles */
+    .tech-circles {
+      position: relative;
+      width: 120px;
+      height: 120px;
+    }
+    
+    .tech-circle {
+      position: absolute;
+      border: 2px solid transparent;
+      border-radius: 50%;
+      animation: techRotate 2s linear infinite;
+    }
+    
+    .tech-circle:nth-child(1) {
+      width: 120px;
+      height: 120px;
+      border-top: 2px solid #06ba00;
+      border-right: 2px solid #06ba00;
+      animation-duration: 1.5s;
+    }
+    
+    .tech-circle:nth-child(2) {
+      width: 80px;
+      height: 80px;
+      top: 20px;
+      left: 20px;
+      border-bottom: 2px solid #00ff00;
+      border-left: 2px solid #00ff00;
+      animation-duration: 2s;
+      animation-direction: reverse;
+    }
+    
+    .tech-circle:nth-child(3) {
+      width: 40px;
+      height: 40px;
+      top: 40px;
+      left: 40px;
+      border: 2px solid #06ba00;
+      animation-duration: 1s;
+    }
+    
+    @keyframes techRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Matrix-style Loading Text */
+    .loading-text {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #06ba00;
+      text-shadow: 
+        0 0 10px #06ba00,
+        0 0 20px #06ba00,
+        0 0 30px #06ba00;
+      animation: pulseGlow 2s ease-in-out infinite;
+      letter-spacing: 2px;
+    }
+    
+    @keyframes pulseGlow {
+      0%, 100% { 
+        opacity: 0.8;
+        text-shadow: 
+          0 0 10px #06ba00,
+          0 0 20px #06ba00,
+          0 0 30px #06ba00;
+      }
+      50% { 
+        opacity: 1;
+        text-shadow: 
+          0 0 20px #06ba00,
+          0 0 30px #06ba00,
+          0 0 40px #06ba00,
+          0 0 50px #06ba00;
+      }
+    }
+    
+    /* Progress Bar */
+    .progress-container {
+      width: 300px;
+      height: 4px;
+      background: rgba(6, 186, 0, 0.2);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #06ba00, #00ff00, #06ba00);
+      background-size: 200% 100%;
+      border-radius: 2px;
+      animation: progressMove 2s ease-in-out infinite;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    
+    @keyframes progressMove {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    
+    /* Scanning Lines for Preloader */
+    .preloader-scan {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #06ba00, transparent);
+      animation: scanMove 3s linear infinite;
+    }
+    
+    @keyframes scanMove {
+      0% { transform: translateY(0); opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+    
+    /* Matrix Background for Preloader */
+    .preloader-matrix {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      opacity: 0.3;
+    }
+    
+    .preloader-matrix-char {
+      position: absolute;
+      color: #06ba00;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      animation: matrixFall 8s linear infinite;
+    }
+    
+    @keyframes matrixFall {
+      0% { transform: translateY(-100px); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+    ::selection {
+      background: rgba(0, 255, 255, 0.3);
+      color: #ffffff;
+    }
+    
+    body {
+      background: 
+        radial-gradient(circle at 25% 25%, rgba(6, 186, 0, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(0, 0, 0, 0.8) 0%, transparent 50%),
+        linear-gradient(135deg, #000000 0%, #001a00 50%, #000000 100%);
+      color: #ffffff;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    
+    /* Enhanced text visibility */
+    p, span, div, h1, h2, h3, h4, h5, h6 {
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* High contrast text class */
+    .high-contrast-text {
+      color: #ffffff !important;
+      text-shadow: 
+        0 1px 2px #000000,
+        0 0 10px rgba(6, 186, 0, 0.3);
+      filter: none;
+    }
+    
+    /* Matrix Rain Effect */
+    .matrix-rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    
+    .matrix-char {
+      position: absolute;
+      color: #06ba00;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 14px;
+      animation: matrix 10s linear infinite;
+      opacity: 0.7;
+    }
+    
+    /* Scanning Line Effect */
+    .scan-line {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #06ba00, transparent);
+      animation: scan-line 3s linear infinite;
+      z-index: 2;
+      pointer-events: none;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(45deg, #06ba00 0%, #00ff00 50%, #06ba00 100%);
+      background-size: 200% 200%;
+      animation: gradient-shift 3s ease infinite;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: none;
+      text-shadow: none;
+      font-weight: 700;
+    }
+    
+    /* Alternative visible gradient text for better readability */
+    .gradient-text-visible {
+      color: #06ba00;
+      text-shadow: 
+        0 0 5px #06ba00,
+        0 0 10px #06ba00,
+        0 1px 0 #000000;
+      font-weight: 700;
+      filter: none;
+    }
+    
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #06ba00 0%, #000000 50%, #06ba00 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .gradient-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      animation: shimmer 2s infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+    
+    .hero-bg {
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(6, 186, 0, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(0, 0, 0, 0.3) 0%, transparent 40%),
+        linear-gradient(135deg, #000000 0%, #001a00 100%);
+      position: relative;
+    }
+    
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><g fill="none" stroke="%2306ba00" stroke-width="0.5" opacity="0.3"><path d="M0 0h60v60H0z"/><path d="M0 30h60M30 0v60"/></g></svg>');
+      animation: tech-grid-move 20s linear infinite;
+    }
+    
+    @keyframes tech-grid-move {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(60px, 60px); }
+    }
+    
+    .tech-grid {
+      background-image: 
+        linear-gradient(rgba(6, 186, 0, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(6, 186, 0, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: tech-grid-move 20s linear infinite;
+    }
+    
+    .glow-card {
+      background: rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(6, 186, 0, 0.3);
+      box-shadow: 
+        0 0 20px rgba(6, 186, 0, 0.3),
+        inset 0 0 20px rgba(6, 186, 0, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .glow-card::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #06ba00, #000000, #06ba00, #000000);
+      z-index: -1;
+      border-radius: inherit;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .glow-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 
+        0 20px 40px rgba(6, 186, 0, 0.4),
+        0 0 40px rgba(6, 186, 0, 0.3),
+        inset 0 0 30px rgba(6, 186, 0, 0.2);
+    }
+    
+    .glow-card:hover::before {
+      opacity: 1;
+    }
+    
+    .neon-text {
+      color: #06ba00 !important;
+      text-shadow: 
+        0 0 5px #06ba00,
+        0 0 10px #06ba00,
+        0 0 15px #06ba00,
+        0 1px 0 #000000;
+      animation: neon-pulse 2s ease-in-out infinite alternate;
+      filter: none;
+      font-weight: 600;
+    }
+    
+    .cyber-button {
+      background: linear-gradient(45deg, #06ba00, #004d00);
+      border: 2px solid #06ba00;
+      color: #000;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .cyber-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .cyber-button:hover::before {
+      left: 100%;
+    }
+    
+    .cyber-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 10px 20px rgba(6, 186, 0, 0.3),
+        0 0 30px rgba(6, 186, 0, 0.5);
+    }
+    
+    .timeline-dot {
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, #06ba00 0%, #000000 100%);
+      border: 3px solid #000000;
+      box-shadow: 0 0 15px rgba(6, 186, 0, 0.6);
+      position: relative;
+    }
+    
+    .timeline-dot::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      background: #06ba00;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: neon-pulse 2s ease-in-out infinite alternate;
+    }
+    
+    .timeline-line {
+      width: 3px;
+      background: linear-gradient(to bottom, #06ba00, #000000, #06ba00);
+      box-shadow: 0 0 10px rgba(6, 186, 0, 0.5);
+    }
+    
+    .nav-link {
+      position: relative;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #06ba00 0%, #000000 100%);
+      transition: width 0.3s ease;
+      box-shadow: 0 0 5px rgba(6, 186, 0, 0.8);
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .floating-shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.3;
+      z-index: 0;
+    }
+    
+    .shape-1 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #06ba00 0%, transparent 70%);
+      top: 10%;
+      left: 10%;
+      animation: float 12s ease-in-out infinite;
+    }
+    
+    .shape-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #000000 0%, transparent 70%);
+      bottom: 10%;
+      right: 10%;
+      animation: float 15s ease-in-out infinite reverse;
+    }
+    
+    .shape-3 {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, #004d00 0%, transparent 70%);
+      top: 60%;
+      left: 80%;
+      animation: float 10s ease-in-out infinite;
+    }
+    
+    .faq-item {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(6, 186, 0, 0.2);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .faq-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(6, 186, 0, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .faq-item:hover {
+      border-color: rgba(6, 186, 0, 0.5);
+      box-shadow: 0 0 20px rgba(6, 186, 0, 0.3);
+    }
+    
+    .faq-item:hover::before {
+      left: 100%;
+    }
+    
+    .faq-question {
+      transition: all 0.3s ease;
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    .faq-question:hover {
+      background: rgba(6, 186, 0, 0.1);
+      color: #06ba00;
+    }
+    
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+    
+    .faq-answer.active {
+      max-height: 500px;
+    }
+    
+    .faq-chevron {
+      transition: transform 0.3s ease;
+      color: #06ba00;
+    }
+    
+    .faq-chevron.active {
+      transform: rotate(180deg);
+    }
+    
+    .countdown-item {
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(6, 186, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .countdown-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent, rgba(6, 186, 0, 0.1), transparent);
+      animation: shimmer 3s infinite;
+    }
+    
+    .countdown-number {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2rem, 8vw, 4rem);
+      font-weight: 700;
+      color: #06ba00;
+      text-shadow: 
+        0 0 10px #06ba00,
+        0 0 20px #06ba00,
+        0 1px 2px #000000;
+      filter: none;
+    }
+    
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 50px;
+      border: 2px solid rgba(6, 186, 0, 0.6);
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(6, 186, 0, 0.4);
+    }
+    
+    .scroll-indicator::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      width: 6px;
+      height: 6px;
+      background: #06ba00;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      animation: scroll 2s infinite;
+      box-shadow: 0 0 10px rgba(6, 186, 0, 0.8);
+    }
+    
+    @keyframes scroll {
+      0% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, 20px);
+        opacity: 0;
+      }
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #0a0a0f;
+      border-radius: 5px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #06ba00, #000000, #06ba00);
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(6, 186, 0, 0.5);
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, #00ff00, #003300, #00ff00);
+      box-shadow: 0 0 15px rgba(6, 186, 0, 0.8);
+    }
+    
+    @media (max-width: 768px) {
+      .timeline-dot {
+        left: 20px;
+      }
+      
+      .timeline-line {
+        left: 27px;
+      }
+      
+      .timeline-content {
+        margin-left: 60px;
+      }
+    }
+  </style>
+</head>
+<body class="font-sans">
+  <!-- Futuristic Preloader -->
+  <div class="preloader" id="preloader">
+    <!-- Matrix Background -->
+    <div class="preloader-matrix" id="preloader-matrix"></div>
+    
+    <!-- Scanning Line -->
+    <div class="preloader-scan"></div>
+    
+    <!-- Main Loader -->
+    <div class="loader-container">
+      <!-- Rotating Tech Circles -->
+      <div class="tech-circles">
+        <div class="tech-circle"></div>
+        <div class="tech-circle"></div>
+        <div class="tech-circle"></div>
+      </div>
+      
+      <!-- Loading Text -->
+      <div class="loading-text" id="loading-text">INITIALIZING...</div>
+      
+      <!-- Progress Bar -->
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      
+      <!-- Tech Info -->
+      <div class="text-center font-cyber text-primary/60 text-sm">
+        <div id="loading-status">System Boot Sequence</div>
+      </div>
+    </div>
+  </div>
+  <!-- Matrix Rain Effect -->
+  <div class="matrix-rain" id="matrix-rain"></div>
+  
+  <!-- Scanning Line Effect -->
+  <div class="scan-line"></div>
+  
+  <!-- Floating background shapes -->
+  <div class="floating-shape shape-1"></div>
+  <div class="floating-shape shape-2"></div>
+  <div class="floating-shape shape-3"></div>
+  
+  <!-- Logo Bar -->
+  <div class="bg-dark/95 backdrop-blur-md py-4 border-b border-primary/30 relative z-30">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-3 gap-4 items-center">
+        <a href="https://ieeecs.wyb.ac.lk/" class="flex justify-center transform hover:scale-110 transition-all duration-300">
+          <img src="assets/techX/ieee.png" alt="IEEE Logo" class="h-14 md:h-16 w-auto object-contain filter drop-shadow-lg hover:drop-shadow-[0_0_15px_rgba(0,255,255,0.8)]">
+        </a>
+        <a href="#" class="flex justify-center transform hover:scale-110 transition-all duration-300">
+          <img src="assets/techX/wusl_logo.png" alt="WUSL Logo" class="h-14 md:h-16 w-auto object-contain filter drop-shadow-lg hover:drop-shadow-[0_0_15px_rgba(0,255,255,0.8)]">
+        </a>
+        <a href="#" class="flex justify-center transform hover:scale-110 transition-all duration-300">
+          <img src="assets/techX/ieee%20syp.png" alt="IEEE CS SYP Logo" class="h-14 md:h-16 w-auto object-contain filter drop-shadow-lg hover:drop-shadow-[0_0_15px_rgba(0,255,255,0.8)]">
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Navigation -->
+  <nav class="bg-dark/95 backdrop-blur-md py-4 sticky top-0 z-50 border-b border-primary/30 relative">
+    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent"></div>
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="flex justify-center w-full">
+        <div class="hidden md:flex justify-between items-center w-full max-w-2xl">
+          <a href="#about" class="nav-link text-white hover:text-primary font-medium px-4 py-2 high-contrast-text">About</a>
+          <a href="#timeline" class="nav-link text-white hover:text-primary font-medium px-4 py-2 high-contrast-text">Timeline</a>
+          <a href="#register" class="nav-link text-white hover:text-primary font-medium px-4 py-2 high-contrast-text">Register</a>
+          <a href="#faq" class="nav-link text-white hover:text-primary font-medium px-4 py-2 high-contrast-text">FAQ</a>
+        </div>
+        <button class="md:hidden text-white absolute right-4 hover:text-primary transition-colors" id="mobile-menu-button">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Mobile menu -->
+      <div class="md:hidden hidden mt-4" id="mobile-menu">
+        <div class="flex flex-col items-center space-y-4">
+          <a href="#about" class="nav-link text-white hover:text-primary font-medium px-4 py-2 w-full text-center high-contrast-text">About</a>
+          <a href="#timeline" class="nav-link text-white hover:text-primary font-medium px-4 py-2 w-full text-center high-contrast-text">Timeline</a>
+          <a href="#register" class="nav-link text-white hover:text-primary font-medium px-4 py-2 w-full text-center high-contrast-text">Register</a>
+          <a href="#faq" class="nav-link text-white hover:text-primary font-medium px-4 py-2 w-full text-center high-contrast-text">FAQ</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Hero Section -->
+  <section class="hero-bg min-h-screen flex items-center relative overflow-hidden">
+    <div class="absolute inset-0 tech-grid"></div>
+    <div class="container mx-auto px-4 py-24 relative z-10">
+      <div class="flex flex-col items-center text-center">
+        <div class="mb-8 animate__animated animate__fadeInDown">
+          <img 
+            src="assets/techX/techX-Bg-Remove.png" 
+            alt="TechX Logo" 
+            style="width: 60%; max-width: 500px; margin-top: -10px; transform: translateX(100px);"
+            class="filter drop-shadow-[0_0_30px_rgba(0,255,255,0.6)] hover:drop-shadow-[0_0_50px_rgba(0,255,255,0.8)] transition-all duration-500">
+        </div>      
+        <p class="text-xl md:text-2xl mb-8 max-w-3xl leading-relaxed font-cyber high-contrast-text">
+          Where <span class="gradient-text-visible font-bold">innovation</span> meets <span class="gradient-text-visible font-bold">technology</span> in a groundbreaking event organized by IEEE Computer Society WUSL.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 mb-16">
+          <a href="#register" class="cyber-button px-8 py-4 rounded-lg text-lg transition-all duration-300 transform hover:-translate-y-1">
+            Register Now <i class="bi bi-arrow-right ml-2"></i>
+          </a>
+          <a href="#about" class="px-8 py-4 border-2 border-primary text-primary font-bold rounded-lg text-lg hover:bg-primary/10 transition-all font-display relative overflow-hidden group">
+            <span class="relative z-10">Learn More</span>
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+          </a>
+        </div>
+        
+        <div class="flex flex-wrap justify-center gap-6 max-w-4xl mb-12">
+          <div class="flex items-center gap-2 bg-dark/50 backdrop-blur-sm px-4 py-2 rounded-full border border-primary/40 glow-card">
+            <div class="w-3 h-3 rounded-full bg-accent animate-pulse"></div>
+            <span class="font-cyber high-contrast-text font-semibold">Wayamba University</span>
+          </div>
+          <div class="flex items-center gap-2 bg-dark/50 backdrop-blur-sm px-4 py-2 rounded-full border border-secondary/40 glow-card">
+            <div class="w-3 h-3 rounded-full bg-secondary animate-pulse"></div>
+            <span class="font-cyber high-contrast-text font-semibold">National Event</span>
+          </div>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div class="text-center mb-6">
+          <h3 class="text-2xl font-display font-bold text-primary animate-neon-pulse">Event Starts In</h3>
+        </div>
+        <div class="flex justify-center mb-8 relative z-20 animate__animated animate__fadeIn">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 bg-dark/90 backdrop-blur-md p-8 rounded-xl border border-primary/50 shadow-lg glow-card">
+            <div class="countdown-item p-4 rounded-lg">
+              <div class="countdown-number text-3xl md:text-4xl" id="days">00</div>
+              <div class="text-sm text-primary high-contrast-text font-cyber font-semibold">Days</div>
+            </div>
+            <div class="countdown-item p-4 rounded-lg">
+              <div class="countdown-number text-3xl md:text-4xl" id="hours">00</div>
+              <div class="text-sm text-primary high-contrast-text font-cyber font-semibold">Hours</div>
+            </div>
+            <div class="countdown-item p-4 rounded-lg">
+              <div class="countdown-number text-3xl md:text-4xl" id="minutes">00</div>
+              <div class="text-sm text-primary high-contrast-text font-cyber font-semibold">Minutes</div>
+            </div>
+            <div class="countdown-item p-4 rounded-lg">
+              <div class="countdown-number text-3xl md:text-4xl" id="seconds">00</div>
+              <div class="text-sm text-primary high-contrast-text font-cyber font-semibold">Seconds</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="scroll-indicator"></div>
+    </div>
+  </section>
+  
+  <!-- About Section -->
+  <section class="py-20 relative" id="about">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-display font-bold mb-4 gradient-text">
+          About TechX Sri Lanka
+        </h2>
+        <div class="w-24 h-1 gradient-bg rounded-full mx-auto"></div>
+      </div>
+      
+      <div class="flex flex-col lg:flex-row items-center gap-12 mb-20">
+        <div class="lg:w-1/2 relative">
+          <div class="glow-card bg-dark/50 backdrop-blur-sm p-1 rounded-2xl">
+            <img src="assets/techX/techX.jpg" alt="TechX Team" class="rounded-xl w-full">
+          </div>
+          <div class="absolute -bottom-6 -right-6 bg-accent text-dark px-4 py-2 rounded-lg font-bold rotate-6 shadow-lg">
+            #InnovateWithTechX
+          </div>
+        </div>
+        <div class="lg:w-1/2">
+          <div class="bg-dark/70 backdrop-blur-sm p-8 rounded-xl border border-gray-800">
+            <h3 class="text-2xl font-bold mb-4 text-primary">The Premier Tech Event</h3>
+            <p class="mb-6 text-lg leading-relaxed">
+              TechX Sri Lanka 2025 is the flagship event organized under the IEEE Computer Society Student & Young Professionals (SYP). Hosted for the first time by the IEEE Computer Society of Wayamba University of Sri Lanka, this event sets a new benchmark for tech conferences in the country.
+            </p>
+            <p class="text-lg leading-relaxed">
+              Featuring cutting-edge tech sessions, expert mentoring programs, and a national-level Ideahackathon competition, TechX Sri Lanka connects students, professionals, and industry leaders to foster innovation and collaboration in the rapidly evolving tech landscape.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex flex-col lg:flex-row-reverse items-center gap-12">
+        <div class="lg:w-1/2 relative">
+          <div class="glow-card bg-dark/50 backdrop-blur-sm p-1 rounded-2xl">
+            <img src="assets/techX/inova.png" alt="INNOVA" class="rounded-xl w-full">
+          </div>
+          <div class="absolute -bottom-6 -left-6 bg-secondary text-light px-4 py-2 rounded-lg font-bold -rotate-6 shadow-lg">
+            #ChallengeAccepted
+          </div>
+        </div>
+        <div class="lg:w-1/2">
+          <div class="bg-dark/70 backdrop-blur-sm p-8 rounded-xl border border-gray-800">
+            <h3 class="text-2xl font-bold mb-4 text-primary">INNOVA Challenge</h3>
+            <p class="mb-6 text-lg leading-relaxed">
+              INNOVA is the innovation challenge at the heart of TechX Sri Lanka, designed to push the boundaries of creativity and problem-solving. This competitive platform invites participants to develop groundbreaking solutions to real-world problems.
+            </p>
+            <p class="mb-6 text-lg leading-relaxed">
+              Through a series of workshops, mentoring sessions, and collaborative opportunities, INNOVA provides the perfect environment to transform ideas into viable tech solutions.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-4">
+              <a href="#register" class="inline-flex items-center px-6 py-3 gradient-bg text-white font-bold rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all">
+                Register for INNOVA <i class="bi bi-arrow-right ml-2"></i>
+              </a>
+              <a href="#" class="inline-flex items-center px-6 py-3 border-2 border-primary text-primary font-bold rounded-lg hover:bg-primary/10 transition-all">
+                Learn More <i class="bi bi-info-circle ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Registration Countdown Section -->
+  <section class="py-16 bg-dark/50 backdrop-blur-sm border-y border-gray-800">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col items-center justify-center text-center">
+        <div class="relative w-24 h-32 mb-8">
+          <!-- Sand clock animation -->
+          <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-16 border-4 border-primary rounded-t-full border-b-0"></div>
+          <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-16 border-4 border-primary rounded-b-full border-t-0"></div>
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1 h-6 bg-primary"></div>
+          <!-- Sand particles -->
+          <div class="absolute top-8 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-primary rounded-full animate-[sandFall_3s_linear_infinite]"></div>
+          <div class="absolute top-10 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-primary rounded-full animate-[sandFall_3s_linear_infinite_0.5s]"></div>
+          <div class="absolute top-12 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-primary rounded-full animate-[sandFall_3s_linear_infinite_1s]"></div>
+        </div>
+        
+        <h3 class="text-2xl md:text-3xl font-display font-bold text-primary mb-4">
+          Registration Opens Soon
+        </h3>
+        <p class="text-lg text-gray-300 max-w-md mb-6">
+          Get ready to be part of Sri Lanka's biggest tech event. We'll be opening registrations shortly!
+        </p>
+        
+        <div class="flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full border border-primary/40">
+          <div class="w-3 h-3 rounded-full bg-primary animate-pulse"></div>
+          <span class="font-cyber text-primary font-semibold">Stay Tuned</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Add this to your style section -->
+  <style>
+    @keyframes sandFall {
+      0% { transform: translate(-50%, 0); opacity: 1; }
+      50% { transform: translate(-50%, 24px); opacity: 1; }
+      100% { transform: translate(-50%, 48px); opacity: 0; }
+    }
+  </style>
+  
+  <!-- Timeline Section -->
+  <section class="py-20 relative" id="timeline">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-display font-bold mb-4 gradient-text">
+          Event Timeline
+        </h2>
+        <div class="w-24 h-1 gradient-bg rounded-full mx-auto"></div>
+      </div>
+      
+      <div class="relative max-w-4xl mx-auto">
+        <!-- Timeline line -->
+        <div class="absolute left-1/2 md:left-6 top-0 bottom-0 timeline-line -ml-px"></div>
+        
+        <!-- Timeline items -->
+        <div class="space-y-12">
+          <!-- Item 1 -->
+          <div class="relative pl-8 md:pl-0">
+            <div class="absolute left-0 md:-left-6 top-0 timeline-dot rounded-full z-10"></div>
+            <div class="timeline-content ml-8 md:ml-16">
+              <div class="bg-dark/70 backdrop-blur-sm p-6 rounded-xl border border-gray-800">
+                <div class="flex justify-between items-start mb-2">
+                  <h3 class="text-xl font-bold text-primary">Innova Submissions Open</h3>
+                  <span class="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">June 15, 2025</span>
+                </div>
+                <p class="text-gray-400">Registration opens for the INNOVA innovation challenge. Submit your groundbreaking ideas.</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Item 2 -->
+          <div class="relative pl-8 md:pl-0">
+            <div class="absolute left-0 md:-left-6 top-0 timeline-dot rounded-full z-10"></div>
+            <div class="timeline-content ml-8 md:ml-16">
+              <div class="bg-dark/70 backdrop-blur-sm p-6 rounded-xl border border-gray-800">
+                <div class="flex justify-between items-start mb-2">
+                  <h3 class="text-xl font-bold text-primary">Innova Workshop Series</h3>
+                  <span class="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">July 1-15, 2025</span>
+                </div>
+                <p class="text-gray-400">Interactive workshops to help participants refine their INNOVA submissions with expert guidance.</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Item 3 -->
+          <div class="relative pl-8 md:pl-0">
+            <div class="absolute left-0 md:-left-6 top-0 timeline-dot rounded-full z-10"></div>
+            <div class="timeline-content ml-8 md:ml-16">
+              <div class="bg-dark/70 backdrop-blur-sm p-6 rounded-xl border border-gray-800">
+                <div class="flex justify-between items-start mb-2">
+                  <h3 class="text-xl font-bold text-primary">TechX Registration Open</h3>
+                  <span class="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">July 20, 2025</span>
+                </div>
+                <p class="text-gray-400">General registration opens for all TechX Sri Lanka events and activities.</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Item 4 -->
+          <div class="relative pl-8 md:pl-0">
+            <div class="absolute left-0 md:-left-6 top-0 timeline-dot rounded-full z-10"></div>
+            <div class="timeline-content ml-8 md:ml-16">
+              <div class="bg-dark/70 backdrop-blur-sm p-6 rounded-xl border border-gray-800">
+                <div class="flex justify-between items-start mb-2">
+                  <h3 class="text-xl font-bold text-primary">Innova Submission Closing</h3>
+                  <span class="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">August 10, 2025</span>
+                </div>
+                <p class="text-gray-400">Final deadline for INNOVA challenge submissions. Last chance to enter!</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Item 5 -->
+          <div class="relative pl-8 md:pl-0">
+            <div class="absolute left-0 md:-left-6 top-0 timeline-dot rounded-full z-10"></div>
+            <div class="timeline-content ml-8 md:ml-16">
+              <div class="bg-dark/70 backdrop-blur-sm p-6 rounded-xl border border-gray-800">
+                <div class="flex justify-between items-start mb-2">
+                  <h3 class="text-xl font-bold text-primary">TechX Registration Closing</h3>
+                  <span class="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">August 20, 2025</span>
+                </div>
+                <p class="text-gray-400">Final deadline to register for TechX Sri Lanka main event.</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Item 6 -->
+          <div class="relative pl-8 md:pl-0">
+            <div class="absolute left-0 md:-left-6 top-0 timeline-dot rounded-full z-10"></div>
+            <div class="timeline-content ml-8 md:ml-16">
+              <div class="bg-dark/70 backdrop-blur-sm p-6 rounded-xl border border-primary glow-card">
+                <div class="flex justify-between items-start mb-2">
+                  <h3 class="text-xl font-bold text-primary">TechX Sri Lanka Flagship Event</h3>
+                  <span class="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">September 5-7, 2025</span>
+                </div>
+                <p class="text-gray-400">Three days of innovation, competition, and networking at the main TechX Sri Lanka event.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Registration Section -->
+  <section class="py-20 relative" id="register">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl md:text-5xl font-display font-bold mb-6 gradient-text">
+          Ready to Join TechX?
+        </h2>
+        <p class="text-xl mb-8 max-w-2xl mx-auto leading-relaxed">
+          Be part of Sri Lanka's most exciting tech event. Registration opens soon - stay tuned!
+        </p>
+        
+        
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a href="#" class="px-8 py-4 gradient-bg text-white font-bold rounded-lg text-lg hover:shadow-lg hover:shadow-primary/30 transition-all transform hover:-translate-y-1 flex items-center justify-center">
+            <i class="bi bi-bell-fill mr-2"></i> Get Notified
+          </a>
+          <a href="#" class="px-8 py-4 border-2 border-primary text-primary font-bold rounded-lg text-lg hover:bg-primary/10 transition-all flex items-center justify-center">
+            <i class="bi bi-question-circle-fill mr-2"></i> Have Questions?
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- FAQ Section -->
+  <section class="py-20 bg-dark/50 backdrop-blur-sm border-t border-gray-800" id="faq">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-display font-bold mb-4 gradient-text">
+          Frequently Asked Questions
+        </h2>
+        <div class="w-24 h-1 gradient-bg rounded-full mx-auto"></div>
+      </div>
+      
+      <div class="max-w-3xl mx-auto space-y-4">
+        <!-- FAQ Item 1 -->
+        <div class="faq-item rounded-xl">
+          <button class="faq-question w-full text-left p-6 flex justify-between items-center">
+            <span class="font-medium">What is IEEE CS SYP?</span>
+            <i class="bi bi-chevron-down faq-chevron"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="p-6 pt-0">
+              <p>The IEEE Computer Society Student and Young Professionals (CS SYP) Activities Committee focuses on delivering engaging activities and resources that cater to the needs of students and early-career professionals. It supports professional growth, networking, and technical skill-building through various initiatives, including IEEE CS TechX events conducted globally.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 2 -->
+        <div class="faq-item rounded-xl">
+          <button class="faq-question w-full text-left p-6 flex justify-between items-center">
+            <span class="font-medium">What is IEEE CS SBC WUSL?</span>
+            <i class="bi bi-chevron-down faq-chevron"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="p-6 pt-0">
+              <p>The IEEE Computer Society Student Branch Chapter of Wayamba University of Sri Lanka was established to bridge academic knowledge with practical industry insights for computing students. Since its inception, it has focused on:</p>
+              <ul class="list-disc pl-6 mt-2 space-y-1">
+                <li>Organizing technical events, webinars, and workshops</li>
+                <li>Promoting collaboration and innovation among students</li>
+                <li>Enhancing members' technical and soft skills</li>
+                <li>Providing exposure to current trends in computer science and engineering</li>
+              </ul>
+              <p class="mt-3 font-bold">As part of the IEEE SB WUSL, IEEE CS SBC WUSL plays a key role in empowering young technologists to grow and excel in the field of computing.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 3 -->
+        <div class="faq-item rounded-xl">
+          <button class="faq-question w-full text-left p-6 flex justify-between items-center">
+            <span class="font-medium">What is the benefit of participating in TechX Sri Lanka?</span>
+            <i class="bi bi-chevron-down faq-chevron"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="p-6 pt-0">
+              <ul class="list-disc pl-6 space-y-1">
+                <li>Gain valuable insights from industry experts through interactive tech and mentoring sessions</li>
+                <li>Compete in a national-level Ideahackathon that challenges your creativity and problem-solving skills</li>
+                <li>Network with top professionals, IEEE leaders, and fellow innovators from other universities</li>
+                <li>Earn recognition, certificates, and exciting rewards for your participation</li>
+                <li>Add impactful experience to your resume and take your tech journey to the next level</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 4 -->
+        <div class="faq-item rounded-xl">
+          <button class="faq-question w-full text-left p-6 flex justify-between items-center">
+            <span class="font-medium">Who can participate in TechX Sri Lanka?</span>
+            <i class="bi bi-chevron-down faq-chevron"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="p-6 pt-0">
+              <p>TechX Sri Lanka 2025 is open to all university students across Sri Lanka. Participants must register through the official event platform.</p>
+              <p>You can join as:</p>
+              <ul class="list-disc pl-6 mt-2 space-y-1">
+                <li>A competitor in the Ideahackathon (open to all universities)</li>
+                <li>An attendee for tech sessions and mentoring programs</li>
+                <li>A volunteer supporting the event's organization and success</li>
+              </ul>
+              <p class="mt-3 font-bold">No IEEE membership is required to participate in TechX Sri Lanka 2025.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 5 -->
+        <div class="faq-item rounded-xl">
+          <button class="faq-question w-full text-left p-6 flex justify-between items-center">
+            <span class="font-medium">What is IEEE?</span>
+            <i class="bi bi-chevron-down faq-chevron"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="p-6 pt-0">
+              <p>The Institute of Electrical and Electronics Engineers (IEEE) is the world's largest professional organization dedicated to advancing technology for the benefit of humanity. With a global network of members, IEEE inspires innovation through its highly cited research publications, world-class conferences, industry-leading technology standards, and diverse professional and educational activities.</p>
+              <p>IEEE plays a pivotal role in shaping the future of technology while empowering engineers, researchers, and students across the world to drive positive change.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 6 -->
+        <div class="faq-item rounded-xl">
+          <button class="faq-question w-full text-left p-6 flex justify-between items-center">
+            <span class="font-medium">How to join IEEE?</span>
+            <i class="bi bi-chevron-down faq-chevron"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="p-6 pt-0">
+              <p>Join a global community of over 460,000 technology and engineering professionals who share a passion for learning, collaborating, and innovating.</p>
+              <p>By becoming an IEEE member, you can:</p>
+              <ul class="list-disc pl-6 mt-2 space-y-1">
+                <li>Access exclusive resources and opportunities to stay ahead in a rapidly evolving tech landscape</li>
+                <li>Network with professionals in your region or within your technical area of interest</li>
+                <li>Mentor and inspire the next generation of engineers and technologists</li>
+              </ul>
+              <p class="mt-4 font-bold">There's no better time to take advantage of everything IEEE has to offer. Join now and unlock immediate access to all the valuable benefits of IEEE membership.</p>
+              <div class="mt-6 flex flex-wrap gap-4">
+                <a href="https://www.ieee.org/membership/join#chapter=id-7311-Students-" target="_blank" class="px-4 py-2 gradient-bg text-white rounded hover:shadow-lg hover:shadow-primary/30 transition-all">
+                  <i class="bi bi-arrow-right-circle mr-2"></i>Join as a Student
+                </a>
+                <a href="https://www.ieee.org/membership/join/index.html" target="_blank" class="px-4 py-2 gradient-bg text-white rounded hover:shadow-lg hover:shadow-primary/30 transition-all">
+                  <i class="bi bi-arrow-right-circle mr-2"></i>Join as a Professional
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Contact Section -->
+  <section class="py-16 bg-dark/50 backdrop-blur-sm border-t border-gray-800">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-display font-bold mb-4 gradient-text">
+          Contact Our Team
+        </h2>
+        <div class="w-24 h-1 gradient-bg rounded-full mx-auto"></div>
+      </div>
+      
+      <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-dark/70 backdrop-blur-sm p-6 rounded-xl border border-gray-800">
+          <h3 class="text-xl font-bold mb-4 text-primary">Chairperson</h3>
+          <p class="text-gray-400 mb-2"><i class="bi bi-person-fill mr-2"></i> John Doe</p>
+          <p class="text-gray-400 mb-2"><i class="bi bi-envelope mr-2"></i> chair@ieeecs.wyb.ac.lk</p>
+          <p class="text-gray-400"><i class="bi bi-phone mr-2"></i> +94 77 123 4567</p>
+        </div>
+        
+        <div class="bg-dark/70 backdrop-blur-sm p-6 rounded-xl border border-gray-800">
+          <h3 class="text-xl font-bold mb-4 text-primary">Secretary</h3>
+          <p class="text-gray-400 mb-2"><i class="bi bi-person-fill mr-2"></i> Jane Smith</p>
+          <p class="text-gray-400 mb-2"><i class="bi bi-envelope mr-2"></i> secretary@ieeecs.wyb.ac.lk</p>
+          <p class="text-gray-400"><i class="bi bi-phone mr-2"></i> +94 77 765 4321</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark py-12 border-t border-gray-800">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-6 md:mb-0 text-center md:text-left">
+          <h3 class="text-xl font-display font-bold mb-2 gradient-text">TechX Sri Lanka</h3>
+          <p class="text-gray-400">The premier tech event organized by IEEE Computer Society WUSL.</p>
+        </div>
+        
+        <div class="flex space-x-4 mb-6 md:mb-0">
+          <a href="#" class="text-gray-400 hover:text-primary transition">
+            <i class="bi bi-facebook text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary transition">
+            <i class="bi bi-twitter-x text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary transition">
+            <i class="bi bi-instagram text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary transition">
+            <i class="bi bi-linkedin text-xl"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+        <p class="text-gray-500">© 2025 IEEE Computer Society WUSL. All rights reserved.</p>
+        <p class="text-gray-500 mt-2">Designed with ❤️ by Wayamba SB Web Team</p>
+      </div>
+    </div>
+  </footer>
+  
+  <script>
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // FAQ accordion functionality
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    faqQuestions.forEach(question => {
+      question.addEventListener('click', () => {
+        const answer = question.parentElement.querySelector('.faq-answer');
+        const chevron = question.querySelector('.faq-chevron');
+        
+        // Close all other answers
+        document.querySelectorAll('.faq-answer').forEach(item => {
+          if (item !== answer) {
+            item.classList.remove('active');
+            item.previousElementSibling.querySelector('.faq-chevron').classList.remove('active');
+          }
+        });
+        
+        // Toggle current answer
+        answer.classList.toggle('active');
+        chevron.classList.toggle('active');
+      });
+    });
+    
+    // Countdown timer
+    function updateCountdown() {
+      const now = new Date();
+      const eventDate = new Date('September 5, 2025 09:00:00');
+      const diff = eventDate - now;
+      
+      if (diff <= 0) {
+        document.getElementById('days').textContent = "00";
+        document.getElementById('hours').textContent = "00";
+        document.getElementById('minutes').textContent = "00";
+        document.getElementById('seconds').textContent = "00";
+        return;
+      }
+      
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      
+      document.getElementById('days').textContent = days.toString().padStart(2, '0');
+      document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+      document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+      document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    }
+    
+    // Update countdown every second
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+          
+          // Close mobile menu if open
+          if (!mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+          }
+        }
+      });
+    });
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('nav');
+      if (window.scrollY > 50) {
+        navbar.classList.add('shadow-lg');
+        navbar.classList.add('bg-dark');
+      } else {
+        navbar.classList.remove('shadow-lg');
+        navbar.classList.remove('bg-dark');
+      }
+    });
+    
+    // Animate elements when they come into view
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('.timeline-content, .faq-item');
+      
+      elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.2;
+        
+        if (elementPosition < screenPosition) {
+          element.classList.add('animate__animated', 'animate__fadeInUp');
+        }
+      });
+    };
+    
+    window.addEventListener('scroll', animateOnScroll);
+    window.addEventListener('load', animateOnScroll);
+    
+    // Matrix Rain Effect
+    function createMatrixRain() {
+      const matrixContainer = document.getElementById('matrix-rain');
+      const characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+      const columns = Math.floor(window.innerWidth / 20);
+      
+      for (let i = 0; i < columns; i++) {
+        const column = document.createElement('div');
+        column.style.position = 'absolute';
+        column.style.left = i * 20 + 'px';
+        column.style.top = '-100px';
+        column.style.width = '20px';
+        column.style.height = '100vh';
+        column.style.pointerEvents = 'none';
+        
+        const createChar = () => {
+          if (Math.random() > 0.95) {
+            const char = document.createElement('div');
+            char.textContent = characters[Math.floor(Math.random() * characters.length)];
+            char.className = 'matrix-char';
+            char.style.left = i * 20 + 'px';
+            char.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            char.style.animationDelay = Math.random() * 2 + 's';
+            matrixContainer.appendChild(char);
+            
+            setTimeout(() => {
+              if (char.parentNode) {
+                char.parentNode.removeChild(char);
+              }
+            }, 5000);
+          }
+        };
+        
+        setInterval(createChar, 100);
+      }
+    }
+    
+    // Initialize matrix rain
+    createMatrixRain();
+    
+    // Glitch effect for headings
+    const glitchElements = document.querySelectorAll('h1, h2, .neon-text');
+    glitchElements.forEach(element => {
+      element.addEventListener('mouseenter', () => {
+        element.style.animation = 'glitch 0.3s infinite';
+      });
+      element.addEventListener('mouseleave', () => {
+        element.style.animation = '';
+      });
+    });
+
+    // Preloader Control
+    function initPreloader() {
+      const preloader = document.getElementById('preloader');
+      const progressBar = document.getElementById('progress-bar');
+      const loadingText = document.getElementById('loading-text');
+      const loadingStatus = document.getElementById('loading-status');
+      const preloaderMatrix = document.getElementById('preloader-matrix');
+      
+      // Create matrix effect for preloader
+      function createPreloaderMatrix() {
+        const characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+        const columns = Math.floor(window.innerWidth / 20);
+        
+        for (let i = 0; i < 30; i++) {
+          const char = document.createElement('div');
+          char.textContent = characters[Math.floor(Math.random() * characters.length)];
+          char.className = 'preloader-matrix-char';
+          char.style.left = Math.random() * window.innerWidth + 'px';
+          char.style.animationDelay = Math.random() * 2 + 's';
+          char.style.animationDuration = (Math.random() * 3 + 5) + 's';
+          preloaderMatrix.appendChild(char);
+        }
+      }
+      
+      createPreloaderMatrix();
+      
+      // Loading sequence
+      const loadingSteps = [
+        { text: 'INITIALIZING...', status: 'System Boot Sequence', progress: 0 },
+        { text: 'LOADING CORE...', status: 'Neural Network Online', progress: 25 },
+        { text: 'CONNECTING...', status: 'Establishing Matrix Link', progress: 50 },
+        { text: 'SYNCING DATA...', status: 'Downloading Protocols', progress: 75 },
+        { text: 'TECH-X READY', status: 'All Systems Operational', progress: 100 }
+      ];
+      
+      let currentStep = 0;
+      
+      function updateLoader() {
+        if (currentStep < loadingSteps.length) {
+          const step = loadingSteps[currentStep];
+          loadingText.textContent = step.text;
+          loadingStatus.textContent = step.status;
+          progressBar.style.width = step.progress + '%';
+          
+          // Add glitch effect on status change
+          if (currentStep > 0) {
+            loadingText.style.animation = 'glitch 0.3s';
+            setTimeout(() => {
+              loadingText.style.animation = 'pulseGlow 2s ease-in-out infinite';
+            }, 300);
+          }
+          
+          currentStep++;
+          
+          if (currentStep < loadingSteps.length) {
+            setTimeout(updateLoader, 800 + Math.random() * 400);
+          } else {
+            // Final step - hide preloader
+            setTimeout(() => {
+              preloader.classList.add('hidden');
+              // Remove preloader from DOM after animation
+              setTimeout(() => {
+                preloader.remove();
+              }, 500);
+            }, 1000);
+          }
+        }
+      }
+      
+      // Start loading sequence
+      setTimeout(updateLoader, 500);
+    }
+    
+    // Initialize preloader when DOM loads
+    document.addEventListener('DOMContentLoaded', initPreloader);
+    
+    // Also start preloader immediately
+    if (document.readyState === 'loading') {
+      initPreloader();
+    }
+  </script>
+</body>
+</html>
