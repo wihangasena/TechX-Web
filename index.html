@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechX Sri Lanka | IEEE CS WUSL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000;
+    }
+    body {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      font-family: 'Orbitron', 'Share Tech Mono', monospace;
+      color: #fff;
+    }
+    /* Matrix Rain Canvas */
+    #matrix-canvas {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+    /* Glowing Logo */
+    .logo {
+      width: 120px;
+      margin-bottom: 2rem;
+      filter: drop-shadow(0 0 30px #06ba00) drop-shadow(0 0 60px #06ba00);
+      animation: logo-float 3s ease-in-out infinite alternate;
+    }
+    @keyframes logo-float {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-20px); }
+    }
+    /* Headline Glitch */
+    .headline {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      color: #06ba00;
+      text-shadow: 0 0 20px #06ba00, 0 0 40px #06ba00;
+      position: relative;
+      z-index: 3;
+      animation: glitch 1.2s infinite linear alternate-reverse;
+    }
+    @keyframes glitch {
+      0% { text-shadow: 2px 0 #00ff00, -2px 0 #06ba00, 0 0 20px #06ba00; }
+      20% { text-shadow: -2px 2px #00ff00, 2px -2px #06ba00, 0 0 40px #06ba00; }
+      40% { text-shadow: 2px -2px #00ff00, -2px 2px #06ba00, 0 0 30px #06ba00; }
+      60% { text-shadow: -2px 0 #00ff00, 2px 0 #06ba00, 0 0 50px #06ba00; }
+      80% { text-shadow: 2px 2px #00ff00, -2px -2px #06ba00, 0 0 40px #06ba00; }
+      100% { text-shadow: 0 0 20px #06ba00, 0 0 40px #06ba00; }
+    }
+    /* Subheadline Reveal */
+    .subheadline {
+      font-size: 1.3rem;
+      color: #fff;
+      letter-spacing: 0.05em;
+      margin-top: 1.5rem;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: subheadline-in 1.2s 1.2s forwards cubic-bezier(.77,0,.18,1);
+      text-shadow: 0 0 10px #06ba00;
+    }
+    @keyframes subheadline-in {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Call to Action Button */
+    .cta {
+      margin-top: 2.5rem;
+      padding: 1rem 2.5rem;
+      font-size: 1.2rem;
+      font-family: 'Orbitron', monospace;
+      color: #000;
+      background: linear-gradient(90deg, #06ba00 0%, #00ff00 100%);
+      border: none;
+      border-radius: 40px;
+      box-shadow: 0 0 30px #06ba00, 0 0 60px #06ba00;
+      cursor: pointer;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      opacity: 0;
+      transform: scale(0.8);
+      animation: cta-in 1.2s 2.2s forwards cubic-bezier(.77,0,.18,1);
+      transition: box-shadow 0.3s, background 0.3s;
+    }
+    .cta:hover {
+      background: linear-gradient(90deg, #00ff00 0%, #06ba00 100%);
+      box-shadow: 0 0 60px #00ff00, 0 0 120px #06ba00;
+    }
+    @keyframes cta-in {
+      to { opacity: 1; transform: scale(1); }
+    }
+    /* Centered Content */
+    .center-content {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100vw;
+      max-width: 100vw;
+      pointer-events: auto;
+    }
+    /* Scanline Overlay */
+    .scanline {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 5;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(6,186,0,0.08) 0px,
+        rgba(6,186,0,0.08) 1px,
+        transparent 1px,
+        transparent 4px
+      );
+      mix-blend-mode: lighten;
+      opacity: 0.7;
+      animation: scanline-move 2.5s linear infinite;
+    }
+    @keyframes scanline-move {
+      0% { background-position-y: 0; }
+      100% { background-position-y: 4px; }
+    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      .headline { font-size: 2rem; }
+      .subheadline { font-size: 1rem; }
+      .logo { width: 70px; }
+      .cta { font-size: 1rem; padding: 0.7rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrix-canvas"></canvas>
+  <div class="scanline"></div>
+  <div class="center-content">
+    <img src="assets/techX/techX-Bg-Remove.png" alt="TechX Logo" class="logo" />
+    <div class="headline">TECHX SRI LANKA 2025</div>
+    <div class="subheadline">Where <span style="color:#06ba00;font-weight:700;">Innovation</span> meets <span style="color:#06ba00;font-weight:700;">Technology</span><br>by IEEE Computer Society WUSL</div>
+    <button class="cta" onclick="window.location.href='wffegwg.html'">Enter Experience</button>
+  </div>
+  <script>
+    // Matrix Rain Animation
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+    const fontSize = 22;
+    const columns = Math.floor(width / fontSize);
+    const drops = Array(columns).fill(1);
+    const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(0,0,0,0.18)';
+      ctx.fillRect(0, 0, width, height);
+      ctx.font = fontSize + "px 'Share Tech Mono', monospace";
+      ctx.fillStyle = '#06ba00';
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+    setInterval(drawMatrix, 40);
+    window.addEventListener('resize', () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    });
+  </script>
+</body>
+</html>
