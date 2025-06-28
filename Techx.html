@@ -610,20 +610,23 @@
     .faq-answer {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.5s ease;
+      transition: max-height 0.5s ease, padding 0.5s ease;
+      padding: 0 !important;
+      opacity: 0;
     }
-    
     .faq-answer.active {
       max-height: 500px;
+      padding: 1.5rem 1.5rem 0 1.5rem !important;
+      opacity: 1;
     }
     
-    .faq-chevron {
-      transition: transform 0.3s ease;
-      color: #06ba00;
+    .faq-answer-content {
+      opacity: 0;
+      transition: opacity 0.5s ease;
     }
     
-    .faq-chevron.active {
-      transform: rotate(180deg);
+    .faq-answer.active .faq-answer-content {
+      opacity: 1;
     }
     
     .countdown-item {
@@ -726,6 +729,19 @@
       
       .timeline-content {
         margin-left: 60px;
+      }
+
+      /* FAQ mobile fixes */
+      .faq-item {
+        margin-bottom: 1rem;
+      }
+      
+      .faq-question {
+        padding: 1rem;
+      }
+      
+      .faq-answer {
+        padding: 0 1rem 1rem;
       }
 
       /* Mobile optimizations */
@@ -1197,7 +1213,7 @@
             <i class="bi bi-chevron-down faq-chevron"></i>
           </button>
           <div class="faq-answer">
-            <div class="p-6 pt-0">
+            <div class="faq-answer-content">
               <p>The IEEE Computer Society Student and Young Professionals (CS SYP) Activities Committee focuses on delivering engaging activities and resources that cater to the needs of students and early-career professionals. It supports professional growth, networking, and technical skill-building through various initiatives, including IEEE CS TechX events conducted globally.</p>
             </div>
           </div>
@@ -1210,7 +1226,7 @@
             <i class="bi bi-chevron-down faq-chevron"></i>
           </button>
           <div class="faq-answer">
-            <div class="p-6 pt-0">
+            <div class="faq-answer-content">
               <p>The IEEE Computer Society Student Branch Chapter of Wayamba University of Sri Lanka was established to bridge academic knowledge with practical industry insights for computing students. Since its inception, it has focused on:</p>
               <ul class="list-disc pl-6 mt-2 space-y-1">
                 <li>Organizing technical events, webinars, and workshops</li>
@@ -1230,7 +1246,7 @@
             <i class="bi bi-chevron-down faq-chevron"></i>
           </button>
           <div class="faq-answer">
-            <div class="p-6 pt-0">
+            <div class="faq-answer-content">
               <ul class="list-disc pl-6 space-y-1">
                 <li>Gain valuable insights from industry experts through interactive tech and mentoring sessions</li>
                 <li>Compete in a national-level Ideahackathon that challenges your creativity and problem-solving skills</li>
@@ -1249,7 +1265,7 @@
             <i class="bi bi-chevron-down faq-chevron"></i>
           </button>
           <div class="faq-answer">
-            <div class="p-6 pt-0">
+            <div class="faq-answer-content">
               <p>TechX Sri Lanka 2025 is open to all university students across Sri Lanka. Participants must register through the official event platform.</p>
               <p>You can join as:</p>
               <ul class="list-disc pl-6 mt-2 space-y-1">
@@ -1269,7 +1285,7 @@
             <i class="bi bi-chevron-down faq-chevron"></i>
           </button>
           <div class="faq-answer">
-            <div class="p-6 pt-0">
+            <div class="faq-answer-content">
               <p>The Institute of Electrical and Electronics Engineers (IEEE) is the world's largest professional organization dedicated to advancing technology for the benefit of humanity. With a global network of members, IEEE inspires innovation through its highly cited research publications, world-class conferences, industry-leading technology standards, and diverse professional and educational activities.</p>
               <p>IEEE plays a pivotal role in shaping the future of technology while empowering engineers, researchers, and students across the world to drive positive change.</p>
             </div>
@@ -1283,7 +1299,7 @@
             <i class="bi bi-chevron-down faq-chevron"></i>
           </button>
           <div class="faq-answer">
-            <div class="p-6 pt-0">
+            <div class="faq-answer-content">
               <p>Join a global community of over 460,000 technology and engineering professionals who share a passion for learning, collaborating, and innovating.</p>
               <p>By becoming an IEEE member, you can:</p>
               <ul class="list-disc pl-6 mt-2 space-y-1">
@@ -1378,7 +1394,6 @@
     
     // FAQ accordion functionality
     const faqQuestions = document.querySelectorAll('.faq-question');
-    
     faqQuestions.forEach(question => {
       question.addEventListener('click', () => {
         const answer = question.parentElement.querySelector('.faq-answer');
@@ -1566,6 +1581,7 @@
         { text: 'TECH-X READY', status: 'All Systems Operational', progress: 100 }
       ];
       
+           
       let currentStep = 0;
       
       function updateLoader() {
