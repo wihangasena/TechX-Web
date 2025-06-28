@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="mobile-web-app-capable" content="yes">
   <title>TechX Sri Lanka | IEEE CS WUSL</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -725,6 +727,73 @@
       .timeline-content {
         margin-left: 60px;
       }
+
+      /* Mobile optimizations */
+      body {
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      h1, h2, h3 {
+        font-size: 1.5rem;
+      }
+
+      .hero-bg {
+        padding-top: 80px;
+        padding-bottom: 60px;
+      }
+
+      .countdown-number {
+        font-size: 1.5rem;
+      }
+
+      .faq-question {
+        padding: 1rem;
+        font-size: 1rem;
+      }
+
+      .faq-answer {
+        padding: 0 1rem 1rem;
+      }
+
+      /* Disable complex animations on mobile */
+      @media (max-width: 640px) {
+        .matrix-rain,
+        .preloader-matrix,
+        .floating-shape {
+          display: none;
+        }
+        
+        body {
+          background: #000;
+        }
+      }
+
+      /* Touch target sizes */
+      a, button {
+        min-height: 44px;
+        min-width: 44px;
+      }
+
+      /* Prevent layout shifts */
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+    /* Performance optimizations */
+    * {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Reduce motion for accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
@@ -774,9 +843,9 @@
   <!-- Logo Bar -->
   <div class="bg-dark/95 backdrop-blur-md py-4 border-b border-primary/30 relative z-30">
     <div class="container mx-auto px-4">
-      <div class="grid grid-cols-3 gap-4 items-center">
+      <div class="grid grid-cols-3 gap-2 md:gap-4 items-center">
         <a href="#" class="flex justify-center transform hover:scale-110 transition-all duration-300">
-        <img src="assets/techX/ieee.png" alt="IEEE logo" class="h-14 md:h-16 w-auto object-contain filter drop-shadow-lg hover:drop-shadow-[0_0_15px_rgba(0,255,255,0.8)] -ml-6 md:-ml-8">
+        <img src="assets/techX/ieee.png" alt="IEEE logo" class="h-10 md:h-16 w-auto object-contain filter drop-shadow-lg hover:drop-shadow-[0_0_15px_rgba(0,255,255,0.8)]">
         </a>
         <a href="https://ieeecs.wyb.ac.lk/" class="flex justify-center transform hover:scale-110 transition-all duration-300">
           <img src="assets/techX/wusl_logo.png" alt="WUSL Logo" class="h-14 md:h-16 w-auto object-contain filter drop-shadow-lg hover:drop-shadow-[0_0_15px_rgba(0,255,255,0.8)]">
@@ -799,8 +868,8 @@
           <a href="#register" class="nav-link text-white hover:text-primary font-medium px-4 py-2 high-contrast-text">Register</a>
           <a href="#faq" class="nav-link text-white hover:text-primary font-medium px-4 py-2 high-contrast-text">FAQ</a>
         </div>
-        <button class="md:hidden text-white absolute right-4 hover:text-primary transition-colors" id="mobile-menu-button">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <button class="md:hidden text-white absolute right-4 hover:text-primary transition-colors p-2" id="mobile-menu-button" aria-label="Menu">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
         </button>
@@ -1409,11 +1478,13 @@
     window.addEventListener('scroll', animateOnScroll);
     window.addEventListener('load', animateOnScroll);
     
-    // Matrix Rain Effect
+    // Matrix Rain Effect - only on desktop
     function createMatrixRain() {
+      if (window.innerWidth < 768) return;
+      
       const matrixContainer = document.getElementById('matrix-rain');
-      const characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-      const columns = Math.floor(window.innerWidth / 20);
+      const characters = '01';
+      const columns = Math.min(20, Math.floor(window.innerWidth / 20));
       
       for (let i = 0; i < columns; i++) {
         const column = document.createElement('div');
