@@ -912,8 +912,9 @@
           <img 
             src="assets/techX/techX-Bg-Remove.png" 
             alt="TechX Logo" 
-            style="width: 60%; max-width: 1000px; margin-top: -10px; transform: translateX(250px);"
-            class="filter drop-shadow-[0_0_30px_rgba(0,255,255,0.6)] hover:drop-shadow-[0_0_50px_rgba(0,255,255,0.8)] transition-all duration-500">
+            style="width: 60%; max-width: 1000px; margin-top: -10px; transform: none;"
+            class="mx-auto filter drop-shadow-[0_0_30px_rgba(0,255,255,0.6)] hover:drop-shadow-[0_0_50px_rgba(0,255,255,0.8)] transition-all duration-500 w-full sm:w-3/5"
+          >
         </div>      
         <p class="text-xl md:text-2xl mb-8 max-w-3xl leading-relaxed font-cyber high-contrast-text">
           Where <span class="gradient-text-visible font-bold">innovation</span> meets <span class="gradient-text-visible font-bold">technology</span> in a groundbreaking event organized by Ieee computer society student branch chapter of wayamba university of Sri Lanka.
@@ -1595,6 +1596,7 @@
             setTimeout(() => {
               preloader.classList.add('hidden');
               // Remove preloader from DOM after animation
+             
               setTimeout(() => {
                 preloader.remove();
               }, 500);
