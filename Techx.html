@@ -610,14 +610,15 @@
     .faq-answer {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.5s ease, padding 0.5s ease;
-      padding: 0 !important;
+      transition: max-height 0.5s ease;
+      padding: 0;
       opacity: 0;
     }
     .faq-answer.active {
-      max-height: 500px;
-      padding: 1.5rem 1.5rem 0 1.5rem !important;
+      max-height: none;
+      padding: 1.5rem !important;
       opacity: 1;
+      overflow: visible;
     }
     
     .faq-answer-content {
@@ -740,8 +741,8 @@
         padding: 1rem;
       }
       
-      .faq-answer {
-        padding: 0 1rem 1rem;
+      .faq-answer.active {
+        padding: 1rem !important;
       }
 
       /* Mobile optimizations */
@@ -917,7 +918,7 @@
             >
         </div>
         <p class="text-xl md:text-2xl mb-8 max-w-3xl leading-relaxed font-cyber high-contrast-text">
-          Where <span class="gradient-text-visible font-bold">innovation</span> meets <span class="gradient-text-visible font-bold">technology</span> in a groundbreaking event organized by IEEE computer society student branch chapter of wayamba university of Sri Lanka.
+          Where <span class="gradient-text-visible font-bold">innovation</span> meets <span class="gradient-text-visible font-bold">technology</span> in a groundbreaking event organized by IEEE computer society student branch chapter of wayamba university of Sri Lanka.
         </p>
         
         <div class="flex flex-col sm:flex-row gap-4 mb-16">
@@ -1193,14 +1194,14 @@
         <div class="w-24 h-1 gradient-bg rounded-full mx-auto"></div>
       </div>
       
-      <div class="max-w-3xl mx-auto space-y-4">
+      <div class="max-w-3xl mx-auto space-y-3 sm:space-y-4">
         <!-- FAQ Item 1 -->
-        <div class="faq-item rounded-xl">
-          <button class="faq-question w-full text-left p-6 flex justify-between items-center">
-            <span class="font-medium">What is IEEE CS SYP?</span>
+        <div class="faq-item rounded-lg sm:rounded-xl">
+          <button class="faq-question w-full text-left p-3 sm:p-4 md:p-6 flex justify-between items-center">
+            <span class="font-medium text-base sm:text-sm md:text-base">What is IEEE CS SYP?</span>
             <i class="bi bi-chevron-down faq-chevron"></i>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer px-3 sm:px-4">
             <div class="faq-answer-content">
               <p>The IEEE Computer Society Student and Young Professionals (CS SYP) Activities Committee focuses on delivering engaging activities and resources that cater to the needs of students and early-career professionals. It supports professional growth, networking, and technical skill-building through various initiatives, including IEEE CS TechX events conducted globally.</p>
             </div>
@@ -1216,8 +1217,8 @@
           <div class="faq-answer">
             <div class="faq-answer-content">
               <p>The IEEE Computer Society Student Branch Chapter of Wayamba University of Sri Lanka was established to bridge academic knowledge with practical industry insights for computing students. Since its inception, it has focused on:</p>
-              <ul class="list-disc pl-6 mt-2 space-y-1">
-                <li>Organizing technical events, webinars, and workshops</li>
+              <ul class="list-disc pl-4 md:pl-6 mt-2 space-y-1">
+                <li class="text-sm md:text-base">Organizing technical events, webinars, and workshops</li>
                 <li>Promoting collaboration and innovation among students</li>
                 <li>Enhancing members' technical and soft skills</li>
                 <li>Providing exposure to current trends in computer science and engineering</li>
@@ -1297,7 +1298,7 @@
               </ul>
               <p class="mt-4 font-bold">There's no better time to take advantage of everything IEEE has to offer. Join now and unlock immediate access to all the valuable benefits of IEEE membership.</p>
               <div class="mt-6 flex flex-wrap gap-4">
-                <a href="https://www.ieee.org/membership/join#chapter=id-7311-Students-" target="_blank" class="px-4 py-2 gradient-bg text-white rounded hover:shadow-lg hover:shadow-primary/30 transition-all">
+                <a href="https://www.ieee.org/membership/join#chapter=id-7311-Students-" target="_blank" class="px-3 py-1.5 md:px-4 md:py-2 gradient-bg text-white rounded hover:shadow-lg hover:shadow-primary/30 transition-all text-sm md:text-base">
                   <i class="bi bi-arrow-right-circle mr-2"></i>Join as a Student
                 </a>
                 <a href="https://www.ieee.org/membership/join/index.html" target="_blank" class="px-4 py-2 gradient-bg text-white rounded hover:shadow-lg hover:shadow-primary/30 transition-all">
